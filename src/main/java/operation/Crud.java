@@ -22,26 +22,30 @@ public class Crud {
 		@SuppressWarnings("unchecked")
 		List<Person> data1 = q11.getResultList();
 		System.out.println(
-				"fname\tlname\temail\t\t\t\tplotno\tarea\tcity\tstate\tphonetype\tservice_provider\tcontactno");
+				"fname\tlname\temail\t\t\t\t\tplotno\tarea\tcity\tstate\tphonetype\tservice_provider\tcontactno");
+		System.out.println(
+				"-----------------------------------------------------------------------------------------------------------------------------------------");
 		for (Person person : data1) {
 
 			System.out.print(person.getFname() + "\t");
 			System.out.print(person.getLname() + "\t");
 			System.out.print(person.getEmail() + "\t\t\t\t");
 			Address as = person.getAddress();
-			System.out.print(as.getPlotNo() + "\t\t");
-			System.out.print(as.getStreet() + "\t\t");
-			System.out.print(as.getCity() + "\t\t");
+			System.out.print(as.getPlotNo() + "\t");
+			System.out.print(as.getStreet() + "\t");
+			System.out.print(as.getCity() + "\t");
+			System.out.print(as.getState() + "\t");
 			List<Phone> ph1 = person.getPhone();
 			for (Phone phone : ph1) {
 				System.out.print(phone.getPhone_type() + "\t\t");
-				System.out.print(phone.getService_provider() + "\t\t");
+				System.out.print(phone.getService_provider() + "\t\t\t");
 				Contact c1 = phone.getContact();
-				System.out.println(c1.getCno() + "\t\t");
+				System.out.println(c1.getCno() + "\n");
 
 			}
 
 		}
+
 	}
 
 	public static void main(String args[]) {
@@ -60,7 +64,7 @@ public class Crud {
 			System.out.println("3.delete");
 			System.out.println("4.display");
 			System.out.println("5.search");
-			System.err.println("6.exit");
+			System.out.println("6.exit");
 
 			System.out.println("enter your choice:-");
 			ch = input.nextInt();
