@@ -1,4 +1,5 @@
-package demo;
+package tables;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -6,7 +7,7 @@ import javax.persistence.Persistence;
 
 
 public class Main{
-	public static void main(String args[]){
+public static void main(String args[]){
 		
 		Address ad=new Address();
 		ad.setPlotNo(153);
@@ -25,8 +26,8 @@ public class Main{
 		
 		per.setAddress(ad);
 		per.getPhone().add(p);
-		ad.getPerson().add(per);
-		p.setPerson(per);
+		
+		p.getPerson().add(per);
 		
 		Contact c=new Contact();
 		c.setCno("9714256465");
@@ -44,6 +45,8 @@ public class Main{
 		em.getTransaction().commit();
 	
 	}
+
+	
 }
 
 

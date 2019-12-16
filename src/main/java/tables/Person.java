@@ -1,15 +1,18 @@
-package demo;
+package tables;
 
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 
 
 
@@ -17,16 +20,17 @@ import javax.persistence.OneToMany;
 public class Person {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	int pid;
 	String fname;
 	String lname;
 	String email;
 	
+	
 	@ManyToOne
 	Address address;
 	
-	@OneToMany(mappedBy="person")
+	@ManyToMany(mappedBy="person",cascade=CascadeType.REMOVE)
 	List<Phone> phone=new ArrayList<Phone>();
 	
 	public List<Phone> getPhone() {

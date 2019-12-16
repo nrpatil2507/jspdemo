@@ -1,38 +1,23 @@
-package demo;
-
-import java.util.ArrayList;
-import java.util.List;
-
+package tables;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Address {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	int aid;
 	int plotNo;
 	String street;
 	String city;
 	String state;
 	
-	@OneToMany(mappedBy="address")
-	List<Person> person=new ArrayList<Person>();
-	
-	public List<Person> getPerson() {
-		return person;
-	}
-	public void setPerson(List<Person> person) {
-		this.person = person;
-	}
 	public int getAid() {
 		return aid;
-	}
-	public void setAid(int aid) {
-		this.aid = aid;
 	}
 	public int getPlotNo() {
 		return plotNo;

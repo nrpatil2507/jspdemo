@@ -1,10 +1,10 @@
-package demo;
+package tables;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -12,22 +12,22 @@ import javax.persistence.*;
 public class Phone {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	int phoneid;
 	String phone_type;
 	String service_provider;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REMOVE)
 	Contact contact;
 	
-	@ManyToOne
-	Person person;
+	@ManyToMany(cascade=CascadeType.REMOVE)
+	List<Person> person=new ArrayList<Person>();
 	
 	
-	public Person getPerson() {
+	public List<Person> getPerson() {
 		return person;
 	}
-	public void setPerson(Person person) {
+	public void setPerson(List<Person> person) {
 		this.person = person;
 	}
 	public int getPhoneid() {
