@@ -2,26 +2,31 @@ buildscript {
     repositories {
         jcenter()
     }
+ 
     dependencies {
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.0'
     }
 }
-
-apply plugin : 'java'
-apply plugin : 'application'
-apply plugin : 'eclipse'
-apply plugin : 'war'
+ 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
-
-
+ 
+// JDK version source compatibility
+sourceCompatibility = 1.7
+// project version
+version = '1.0'
+// War file name
+war.baseName = 'jpaDemo1'
+// Web directory, this overrides the default value "webapp"
 project.webAppDirName = 'src/main/webapp'
-mainClassName = 'tables.Main'
-
+ 
 repositories {
     mavenLocal()
     mavenCentral()
 }
-
+ 
 // Set source directory
 sourceSets {
         main {
@@ -30,28 +35,17 @@ sourceSets {
             }
         }
     }
-
-
-dependencies{
-
-	def tomcatVersion = '7.0.57'
-	    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-		    "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
-	    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
-		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
-	    }
-
-	compile 'org.hibernate:hibernate-core:5.3.2.Final'
+ 
+// dependencies to run on tomcat, are mandatory for tomcat plugin
+dependencies {
+   
+   	compile 'org.hibernate:hibernate-core:5.3.2.Final'
 	compile 'org.postgresql:postgresql:42.2.2'
 	compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version:'1.0.2'
 	providedCompile "javax.servlet:javax.servlet-api:3.1.0"     
 	compile 'org.akhikhl.gretty:gretty:+'
-}	
-
-tomcatRunWar{
-    contextPath = ''
-    httpPort = 8080
-    stopPort = 8191
 }
-
-
+ 
+// context where tomcat is deployed, by defautl localhost:8080/
+tomcatRun.contextPath = '/'
+tomcatRunWar.contextPath = '/'

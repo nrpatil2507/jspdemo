@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="insert.jsp">Insert</a>
-<a>update</a>
-<a>delete</a>
-<a>display</a>
-
+<%@include file="home.jsp" %>
 </body>
 </html>
