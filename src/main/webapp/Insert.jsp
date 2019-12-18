@@ -86,8 +86,6 @@
 				</table>
 				</td>
 		</tr>
-		
-
 		<tr>
 			<td></td><td><input type="submit" name="submit" value="insert" />
 			<input type="reset" name="reset" value="reset" /></td>
@@ -148,7 +146,7 @@ if(request.getParameter("submit")!=null)
 	em.close();
 	emf.close();
 	
-	out.println("<script>alert('person added successful')</script>");
+	out.println("<script>alert('data added successful')</script>");
 	
 }
 %>

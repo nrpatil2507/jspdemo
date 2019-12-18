@@ -1,3 +1,7 @@
+<%@page import="tables.Contact"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="tables.Phone"%>
 <%@page import="tables.Address"%>
 <%@page import="javax.persistence.*"%>
 <%@page import="tables.Person"%>
@@ -15,12 +19,17 @@
 		EntityManager em = emf.createEntityManager();
 		
 		Person per;
+		List<Phone> p=new ArrayList<Phone>();
 		Address address;
 		if (request.getParameter("person_id")!= null) {
 			em.getTransaction().begin();
 			per = em.find(Person.class, Integer.parseInt(request.getParameter("person_id")));
 			session.setAttribute("per",per);
 			address = per.getAddress();
+			p=per.getPhone();
+			for(Phone phone:p)
+			{
+			Contact c=phone.getContact();
 	%>
 
 
@@ -72,6 +81,29 @@
 					</table>
 				</td>
 			</tr>
+			<tr>
+				<td>Contact Detail</td>
+				<td>
+					<table>
+						<tr>
+							<td>Phone type</td>
+							<td><input type="text" name="pt"
+								value="<%out.print(phone.getPhone_type());%>" /></td>
+						</tr>
+						<tr>
+							<td>Service Provider</td>
+							<td><input type="text" name="sr"
+								value="<%out.print(phone.getService_provider());%>" /></td>
+						</tr>
+						<tr>
+							<td>Contact no</td>
+							<td><input type="text" name="cno"
+								value="<%out.print(c.getCno());%>" /></td>
+						</tr>
+			<%} %>			
+					</table>
+				</td>
+			</tr>
 
 			<tr>
 				<td>
@@ -111,6 +143,17 @@
 			
 			em.persist(address);
 			per.setAddress(address);
+			
+			List<Phone> ph = per.getPhone();
+			for (Phone phone : ph) {
+				phone.setPhone_type(request.getParameter("pt"));
+				phone.setService_provider(request.getParameter("sr"));
+				Contact c1 = phone.getContact();
+				c1.setCno(request.getParameter("cno"));
+				em.persist(phone);
+				em.persist(c1);
+
+			}
 				
 			em.persist(per);
 			

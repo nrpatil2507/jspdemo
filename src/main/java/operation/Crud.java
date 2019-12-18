@@ -189,7 +189,7 @@ public class Crud {
 				em.persist(ad1);
 
 				em.getTransaction().commit();
-				System.err.println("data successfully updated!!");
+				System.out.println("data successfully updated!!");
 				display();
 				break;
 
